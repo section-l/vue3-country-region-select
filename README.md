@@ -4,7 +4,7 @@ Vue3-Country-Region-Select provides a pair of Vue 3 components that will allow y
 
 This project is a fork of the original [Vue-Country-Region-Select](https://github.com/gehrj/vue-country-region-select) for Vue 2 by [Justin Gehr](https://github.com/gehrj). If you are looking for Vue 2 support, that is where you want to look.
 
-Credit for goes to [Justin Gehr](https://github.com/gehrj) and the other contributors for the creation of the original [Vue-Country-Region-Select](https://github.com/gehrj/vue-country-region-select). This fork just provides compatibility with Vue 3.
+Credit goes to [Justin Gehr](https://github.com/gehrj) and the other contributors for the creation of the original [Vue-Country-Region-Select](https://github.com/gehrj/vue-country-region-select). This fork just provides compatibility with Vue 3.
 ## Installation
 `npm install vue3-country-region-select --save`
 
@@ -40,7 +40,8 @@ app.mount('#app');
   <country-select v-model="country" :country="country" topCountry="US" />
   <region-select v-model="region" :country="country" :region="region" />
 </template>
-
+```
+```javascript
 export default {
   name: 'MyComponent',
   data: () => ({
