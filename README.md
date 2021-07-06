@@ -6,7 +6,7 @@ This project is a fork of the original [Vue-Country-Region-Select](https://githu
 
 Credit goes to [Justin Gehr](https://github.com/gehrj) and the other contributors for the creation of the original [Vue-Country-Region-Select](https://github.com/gehrj/vue-country-region-select). This fork just provides compatibility with Vue 3.
 ## Installation
-`npm install vue3-country-region-select --save`
+`yarn add git+https://github.com/trouni/vue3-country-region-select.git`
 
 ## Dependencies 
 Being that these are Vue components you will need to use them inside of Vue.
