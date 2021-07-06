@@ -1934,7 +1934,7 @@ var es_object_keys = __webpack_require__("b64b");
 // EXTERNAL MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/country-select.vue?vue&type=template&id=2ea5351a
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/country-select.vue?vue&type=template&id=64085340
 
 var _hoisted_1 = {
   key: 0,
@@ -1965,7 +1965,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])($props.shortCodeDropdown ? region.countryShortCode : region.countryName), 9, ["value", "selected"]);
   }), 128))], 42, ["autocomplete"]);
 }
-// CONCATENATED MODULE: ./src/components/country-select.vue?vue&type=template&id=2ea5351a
+// CONCATENATED MODULE: ./src/components/country-select.vue?vue&type=template&id=64085340
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
 var es_array_filter = __webpack_require__("4de4");
@@ -15834,7 +15834,7 @@ var es_function_name = __webpack_require__("b0c0");
 
 
 /* harmony default export */ var country_selectvue_type_script_lang_js = ({
-  name: 'CountrySelect',
+  name: "CountrySelect",
   props: {
     country: String,
     countryName: Boolean,
@@ -15849,7 +15849,7 @@ var es_function_name = __webpack_require__("b0c0");
     },
     placeholder: {
       type: String,
-      default: 'Select Country'
+      default: "Select Country"
     },
     disablePlaceholder: {
       type: Boolean,
@@ -15893,7 +15893,7 @@ var es_function_name = __webpack_require__("b0c0");
         });
       }
 
-      if (this.$i18n && this.usei18n) {
+      if (this.usei18n && this.$i18n) {
         countryList = countryList.map(function (country) {
           var localeCountry = Object.assign({}, country);
           localeCountry.countryName = _this.$t(country.countryName);
@@ -15929,7 +15929,7 @@ var es_function_name = __webpack_require__("b0c0");
         return this.topCountry;
       }
 
-      return '';
+      return "";
     },
     name: function name() {
       return this.name;
@@ -15938,7 +15938,7 @@ var es_function_name = __webpack_require__("b0c0");
       return this.country;
     },
     valueType: function valueType() {
-      return this.countryName ? 'countryName' : 'countryShortCode';
+      return this.countryName ? "countryName" : "countryShortCode";
     },
     autocompleteAttr: function autocompleteAttr() {
       var autocompleteType = function autocompleteType(showsFullCountryName) {
@@ -15950,7 +15950,7 @@ var es_function_name = __webpack_require__("b0c0");
   },
   methods: {
     onChange: function onChange(country) {
-      this.$emit('update:modelValue', country);
+      this.$emit("update:modelValue", country);
     },
     topCountryName: function topCountryName() {
       var _this3 = this;
