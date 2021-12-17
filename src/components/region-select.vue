@@ -78,7 +78,7 @@ export default {
       if (this.usei18n && this.$i18n) {
         countryRegions = countryRegions.map((region) => {
           let localeRegion = Object.assign({}, region)
-          localeRegion.name = this.$t(region.name)
+          localeRegion.name = this.$t(`regions.${region.name}`)
           return localeRegion
         })
         countryRegions.sort((region1, region2) => {

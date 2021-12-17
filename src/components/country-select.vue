@@ -57,7 +57,7 @@ export default {
       if (this.usei18n && this.$i18n) {
         countryList = countryList.map((country) => {
           let localeCountry = Object.assign({}, country);
-          localeCountry.countryName = this.$t(country.countryName);
+          localeCountry.countryName = this.$t(`countries.${country.countryName}`);
           return localeCountry;
         });
         countryList.sort((country1, country2) => {
@@ -114,7 +114,7 @@ export default {
         }
       });
       if (this.usei18n && this.$i18n) {
-        return this.$t(regionObj.countryName);
+        return this.$t(`countries.${regionObj.countryName}`);
       }
       return this.shortCodeDropdown
         ? regionObj.countryShortCode
