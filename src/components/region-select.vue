@@ -48,8 +48,8 @@ export default {
       this.getRegionWithCountry(findRegion)
     }
   },
-  updated() {
-    console.log('UPDATED IS CALLED')
+  beforeUpdate() {
+    console.log('before update IS CALLED')
     this.getRegionWithCountry()
   },
     computed: {
