@@ -49,17 +49,9 @@ export default {
     }
   },
   updated() {
-    if (this.country) {
-      this.getRegionWithCountry()
-    } else {
-      let findRegion = ''
-      if (this.countryName) {
-        findRegion = this.defaultRegion ? this.defaultRegion : 'United States'
-      } else {
-        findRegion = this.defaultRegion ? this.defaultRegion : 'US'
-      }
-      this.getRegionWithCountry(findRegion)
-    }
+    const originalCountry = this.country
+    this.country = ''
+    this.country = originalCountry
   },
     computed: {
       name() {
