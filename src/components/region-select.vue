@@ -49,9 +49,8 @@ export default {
     }
   },
   updated() {
-    const originalCountry = this.country
-    this.country = ''
-    this.country = originalCountry
+    console.log('UPDATED IS CALLED')
+    this.getRegionWithCountry()
   },
     computed: {
       name() {
