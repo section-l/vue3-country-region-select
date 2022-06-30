@@ -8,7 +8,7 @@ export default {
     countryName: Boolean,
     whiteList: Array,
     blackList: Array,
-    className: String,
+    className: [String, Array, Object],
     shortCodeDropdown: Boolean,
     autocomplete: Boolean,
     topCountry: {
@@ -130,30 +130,31 @@ export default {
     :class="className"
     :autocomplete="autocompleteAttr"
   >
-    <option value="" v-if="!disablePlaceholder && !removePlaceholder">{{
-      placeholder
-    }}</option>
+    <option value="" v-if="!disablePlaceholder && !removePlaceholder">
+      {{ placeholder }}
+    </option>
     <option
       value=""
       v-if="disablePlaceholder && !removePlaceholder"
       disabled
       selected
-      >{{ placeholder }}</option
     >
+      {{ placeholder }}
+    </option>
     <option
       v-if="topCountry"
       :value="firstCountry"
       :selected="country === firstCountry"
-      >{{ topCountryName() }}</option
     >
+      {{ topCountryName() }}
+    </option>
     <option
       v-for="(region, index) in countries"
       :value="region[valueType]"
       :selected="country === region[valueType]"
       :key="index"
-      >{{
-        shortCodeDropdown ? region.countryShortCode : region.countryName
-      }}</option
     >
+      {{ shortCodeDropdown ? region.countryShortCode : region.countryName }}
+    </option>
   </select>
 </template>

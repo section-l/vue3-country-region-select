@@ -1,7 +1,7 @@
 <script>
-import regions from '@/data.js'
+import regions from "@/data.js";
 export default {
-  name: 'RegionSelect',
+  name: "RegionSelect",
   props: {
     country: String,
     region: String,
@@ -10,120 +10,140 @@ export default {
     whiteList: Array,
     blackList: Array,
     regionName: Boolean,
-    className: String,
+    className: [String, Array, Object],
     shortCodeDropdown: Boolean,
     autocomplete: Boolean,
     placeholder: {
       type: String,
-      default: 'Select Region'
+      default: "Select Region",
     },
     disablePlaceholder: {
       type: Boolean,
-      default: false
+      default: false,
     },
     removePlaceholder: {
       type: Boolean,
-      default: false
+      default: false,
     },
     usei18n: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data: () => ({
     shownRegions: [],
     regions,
-    ran: false
+    ran: false,
   }),
   mounted() {
     if (this.country) {
-      this.getRegionWithCountry()
+      this.getRegionWithCountry();
     } else {
-      let findRegion = ''
+      let findRegion = "";
       if (this.countryName) {
-        findRegion = this.defaultRegion ? this.defaultRegion : 'United States'
+        findRegion = this.defaultRegion ? this.defaultRegion : "United States";
       } else {
-        findRegion = this.defaultRegion ? this.defaultRegion : 'US'
+        findRegion = this.defaultRegion ? this.defaultRegion : "US";
       }
-      this.getRegionWithCountry(findRegion)
+      this.getRegionWithCountry(findRegion);
     }
   },
-    computed: {
-      name() {
-        return this.name
-      },
-      value() {
-        return this.region
-      },
-      valueType() {
-        return this.regionName ? 'name' : 'shortCode'
-      },
-      autocompleteAttr() {
-        return this.autocomplete ? "address-level1" : "off";
-      }
+  computed: {
+    name() {
+      return this.name;
+    },
+    value() {
+      return this.region;
+    },
+    valueType() {
+      return this.regionName ? "name" : "shortCode";
+    },
+    autocompleteAttr() {
+      return this.autocomplete ? "address-level1" : "off";
+    },
   },
   methods: {
     onChange(region) {
-      this.$emit('update:modelValue', region)
+      this.$emit("update:modelValue", region);
     },
     getRegionWithCountry(country) {
-      country = country || this.country
+      country = country || this.country;
       let countryRegions = regions.find((elem) => {
         if (this.countryName) {
-          return elem.countryName === country
+          return elem.countryName === country;
         } else {
-          return elem.countryShortCode === country
+          return elem.countryShortCode === country;
         }
-      }).regions
+      }).regions;
       if (this.usei18n && this.$i18n) {
         countryRegions = countryRegions.map((region) => {
-          let localeRegion = Object.assign({}, region)
-          localeRegion.name = this.$t(region.name)
-          return localeRegion
-        })
+          let localeRegion = Object.assign({}, region);
+          localeRegion.name = this.$t(region.name);
+          return localeRegion;
+        });
         countryRegions.sort((region1, region2) => {
-          return region1.name > region2.name ? 1 : -1
-        })
+          return region1.name > region2.name ? 1 : -1;
+        });
       }
       if (this.whiteList) {
         countryRegions = countryRegions.filter((region) => {
-          return this.whiteList.includes(region.shortCode)
-        })
+          return this.whiteList.includes(region.shortCode);
+        });
       }
       if (this.blackList) {
         countryRegions = countryRegions.filter((region) => {
-          return !this.blackList.includes(region.shortCode)
-        })
+          return !this.blackList.includes(region.shortCode);
+        });
       }
-      this.shownRegions = countryRegions
+      this.shownRegions = countryRegions;
       if (this.disablePlaceholder && this.ran) {
-        this.onChange(this.shownRegions[0][this.valueType])
+        this.onChange(this.shownRegions[0][this.valueType]);
       }
       if (this.removePlaceholder) {
-        this.onChange(this.shownRegions[0][this.valueType])
+        this.onChange(this.shownRegions[0][this.valueType]);
       }
-      this.ran = true
-    }
+      this.ran = true;
+    },
   },
   watch: {
     country(newVal, oldVal) {
-      if (oldVal !== '') {
-        this.onChange('')
+      if (oldVal !== "") {
+        this.onChange("");
       }
       if (this.country) {
-        this.getRegionWithCountry()
+        this.getRegionWithCountry();
       } else {
-        this.shownRegions = []
+        this.shownRegions = [];
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <template>
-  <select @change="onChange($event.target.value)" :class="className" :autocomplete="autocompleteAttr">
-    <option v-if="!disablePlaceholder && !removePlaceholder" value="">{{ placeholder }}</option>
-    <option v-if="disablePlaceholder && !removePlaceholder" value="" disabled selected>{{ placeholder }}</option>
-    <option v-for="(place, index) in shownRegions" v-bind:key="index" :value="place[valueType]" :selected="region === place[valueType]">{{shortCodeDropdown ? place.shortCode : place.name}}</option>
+  <select
+    @change="onChange($event.target.value)"
+    :class="className"
+    :autocomplete="autocompleteAttr"
+  >
+    <option v-if="!disablePlaceholder && !removePlaceholder" value="">
+      {{ placeholder }}
+    </option>
+    <option
+      v-if="disablePlaceholder && !removePlaceholder"
+      value=""
+      disabled
+      selected
+    >
+      {{ placeholder }}
+    </option>
+    <option
+      v-for="(place, index) in shownRegions"
+      v-bind:key="index"
+      :value="place[valueType]"
+      :selected="region === place[valueType]"
+    >
+      {{ shortCodeDropdown ? place.shortCode : place.name }}
+    </option>
   </select>
 </template>
