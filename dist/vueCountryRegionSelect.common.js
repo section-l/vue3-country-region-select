@@ -708,68 +708,6 @@ module.exports = classof(global.process) == 'process';
 
 /***/ }),
 
-/***/ "60da":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var DESCRIPTORS = __webpack_require__("83ab");
-var fails = __webpack_require__("d039");
-var objectKeys = __webpack_require__("df75");
-var getOwnPropertySymbolsModule = __webpack_require__("7418");
-var propertyIsEnumerableModule = __webpack_require__("d1e7");
-var toObject = __webpack_require__("7b0b");
-var IndexedObject = __webpack_require__("44ad");
-
-// eslint-disable-next-line es/no-object-assign -- safe
-var $assign = Object.assign;
-// eslint-disable-next-line es/no-object-defineproperty -- required for testing
-var defineProperty = Object.defineProperty;
-
-// `Object.assign` method
-// https://tc39.es/ecma262/#sec-object.assign
-module.exports = !$assign || fails(function () {
-  // should have correct order of operations (Edge bug)
-  if (DESCRIPTORS && $assign({ b: 1 }, $assign(defineProperty({}, 'a', {
-    enumerable: true,
-    get: function () {
-      defineProperty(this, 'b', {
-        value: 3,
-        enumerable: false
-      });
-    }
-  }), { b: 2 })).b !== 1) return true;
-  // should work with symbols and should have deterministic property order (V8 bug)
-  var A = {};
-  var B = {};
-  // eslint-disable-next-line es/no-symbol -- safe
-  var symbol = Symbol();
-  var alphabet = 'abcdefghijklmnopqrst';
-  A[symbol] = 7;
-  alphabet.split('').forEach(function (chr) { B[chr] = chr; });
-  return $assign({}, A)[symbol] != 7 || objectKeys($assign({}, B)).join('') != alphabet;
-}) ? function assign(target, source) { // eslint-disable-line no-unused-vars -- required for `.length`
-  var T = toObject(target);
-  var argumentsLength = arguments.length;
-  var index = 1;
-  var getOwnPropertySymbols = getOwnPropertySymbolsModule.f;
-  var propertyIsEnumerable = propertyIsEnumerableModule.f;
-  while (argumentsLength > index) {
-    var S = IndexedObject(arguments[index++]);
-    var keys = getOwnPropertySymbols ? objectKeys(S).concat(getOwnPropertySymbols(S)) : objectKeys(S);
-    var length = keys.length;
-    var j = 0;
-    var key;
-    while (length > j) {
-      key = keys[j++];
-      if (!DESCRIPTORS || propertyIsEnumerable.call(S, key)) T[key] = S[key];
-    }
-  } return T;
-} : $assign;
-
-
-/***/ }),
-
 /***/ "65f0":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1674,22 +1612,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "cca6":
-/***/ (function(module, exports, __webpack_require__) {
-
-var $ = __webpack_require__("23e7");
-var assign = __webpack_require__("60da");
-
-// `Object.assign` method
-// https://tc39.es/ecma262/#sec-object.assign
-// eslint-disable-next-line es/no-object-assign -- required for testing
-$({ target: 'Object', stat: true, forced: Object.assign !== assign }, {
-  assign: assign
-});
-
-
-/***/ }),
-
 /***/ "ce4e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1925,7 +1847,7 @@ var es_object_keys = __webpack_require__("b64b");
 // EXTERNAL MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/country-select.vue?vue&type=template&id=64085340
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/country-select.vue?vue&type=template&id=6b5eef88
 
 var _hoisted_1 = {
   key: 0,
@@ -1956,7 +1878,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])($props.shortCodeDropdown ? region.countryShortCode : region.countryName), 9, ["value", "selected"]);
   }), 128))], 42, ["autocomplete"]);
 }
-// CONCATENATED MODULE: ./src/components/country-select.vue?vue&type=template&id=64085340
+// CONCATENATED MODULE: ./src/components/country-select.vue?vue&type=template&id=6b5eef88
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
 var es_array_filter = __webpack_require__("4de4");
@@ -1969,9 +1891,6 @@ var es_string_includes = __webpack_require__("2532");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.assign.js
-var es_object_assign = __webpack_require__("cca6");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.find.js
 var es_array_find = __webpack_require__("7db0");
@@ -15823,7 +15742,6 @@ var es_function_name = __webpack_require__("b0c0");
 
 
 
-
 /* harmony default export */ var country_selectvue_type_script_lang_js = ({
   name: "CountrySelect",
   props: {
@@ -15831,7 +15749,7 @@ var es_function_name = __webpack_require__("b0c0");
     countryName: Boolean,
     whiteList: Array,
     blackList: Array,
-    className: String,
+    className: [String, Array, Object],
     shortCodeDropdown: Boolean,
     autocomplete: Boolean,
     topCountry: {
@@ -15971,27 +15889,27 @@ var es_function_name = __webpack_require__("b0c0");
 country_selectvue_type_script_lang_js.render = render
 
 /* harmony default export */ var country_select = (country_selectvue_type_script_lang_js);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/region-select.vue?vue&type=template&id=b4694196
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/region-select.vue?vue&type=template&id=432ee51f
 
 
-var region_selectvue_type_template_id_b4694196_hoisted_1 = {
+var region_selectvue_type_template_id_432ee51f_hoisted_1 = {
   key: 0,
   value: ""
 };
-var region_selectvue_type_template_id_b4694196_hoisted_2 = {
+var region_selectvue_type_template_id_432ee51f_hoisted_2 = {
   key: 1,
   value: "",
   disabled: "",
   selected: ""
 };
-function region_selectvue_type_template_id_b4694196_render(_ctx, _cache, $props, $setup, $data, $options) {
+function region_selectvue_type_template_id_432ee51f_render(_ctx, _cache, $props, $setup, $data, $options) {
   return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])("select", {
     onChange: _cache[1] || (_cache[1] = function ($event) {
       return $options.onChange($event.target.value);
     }),
     class: $props.className,
     autocomplete: $options.autocompleteAttr
-  }, [!$props.disablePlaceholder && !$props.removePlaceholder ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])("option", region_selectvue_type_template_id_b4694196_hoisted_1, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])($props.placeholder), 1)) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true), $props.disablePlaceholder && !$props.removePlaceholder ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])("option", region_selectvue_type_template_id_b4694196_hoisted_2, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])($props.placeholder), 1)) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true), (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(true), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])(external_commonjs_vue_commonjs2_vue_root_Vue_["Fragment"], null, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["renderList"])(_ctx.shownRegions, function (place, index) {
+  }, [!$props.disablePlaceholder && !$props.removePlaceholder ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])("option", region_selectvue_type_template_id_432ee51f_hoisted_1, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])($props.placeholder), 1)) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true), $props.disablePlaceholder && !$props.removePlaceholder ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])("option", region_selectvue_type_template_id_432ee51f_hoisted_2, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])($props.placeholder), 1)) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true), (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(true), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])(external_commonjs_vue_commonjs2_vue_root_Vue_["Fragment"], null, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["renderList"])(_ctx.shownRegions, function (place, index) {
     return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createBlock"])("option", {
       key: index,
       value: place[$options.valueType],
@@ -15999,7 +15917,7 @@ function region_selectvue_type_template_id_b4694196_render(_ctx, _cache, $props,
     }, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])($props.shortCodeDropdown ? place.shortCode : place.name), 9, ["value", "selected"]);
   }), 128))], 42, ["autocomplete"]);
 }
-// CONCATENATED MODULE: ./src/components/region-select.vue?vue&type=template&id=b4694196
+// CONCATENATED MODULE: ./src/components/region-select.vue?vue&type=template&id=432ee51f
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader-v16/dist??ref--0-1!./src/components/region-select.vue?vue&type=script&lang=js
 
@@ -16009,9 +15927,8 @@ function region_selectvue_type_template_id_b4694196_render(_ctx, _cache, $props,
 
 
 
-
 /* harmony default export */ var region_selectvue_type_script_lang_js = ({
-  name: 'RegionSelect',
+  name: "RegionSelect",
   props: {
     country: String,
     region: String,
@@ -16020,12 +15937,12 @@ function region_selectvue_type_template_id_b4694196_render(_ctx, _cache, $props,
     whiteList: Array,
     blackList: Array,
     regionName: Boolean,
-    className: String,
+    className: [String, Array, Object],
     shortCodeDropdown: Boolean,
     autocomplete: Boolean,
     placeholder: {
       type: String,
-      default: 'Select Region'
+      default: "Select Region"
     },
     disablePlaceholder: {
       type: Boolean,
@@ -16051,12 +15968,12 @@ function region_selectvue_type_template_id_b4694196_render(_ctx, _cache, $props,
     if (this.country) {
       this.getRegionWithCountry();
     } else {
-      var findRegion = '';
+      var findRegion = "";
 
       if (this.countryName) {
-        findRegion = this.defaultRegion ? this.defaultRegion : 'United States';
+        findRegion = this.defaultRegion ? this.defaultRegion : "United States";
       } else {
-        findRegion = this.defaultRegion ? this.defaultRegion : 'US';
+        findRegion = this.defaultRegion ? this.defaultRegion : "US";
       }
 
       this.getRegionWithCountry(findRegion);
@@ -16070,7 +15987,7 @@ function region_selectvue_type_template_id_b4694196_render(_ctx, _cache, $props,
       return this.region;
     },
     valueType: function valueType() {
-      return this.regionName ? 'name' : 'shortCode';
+      return this.regionName ? "name" : "shortCode";
     },
     autocompleteAttr: function autocompleteAttr() {
       return this.autocomplete ? "address-level1" : "off";
@@ -16078,7 +15995,7 @@ function region_selectvue_type_template_id_b4694196_render(_ctx, _cache, $props,
   },
   methods: {
     onChange: function onChange(region) {
-      this.$emit('update:modelValue', region);
+      this.$emit("update:modelValue", region);
     },
     getRegionWithCountry: function getRegionWithCountry(country) {
       var _this = this;
@@ -16130,8 +16047,8 @@ function region_selectvue_type_template_id_b4694196_render(_ctx, _cache, $props,
   },
   watch: {
     country: function country(newVal, oldVal) {
-      if (oldVal !== '') {
-        this.onChange('');
+      if (oldVal !== "") {
+        this.onChange("");
       }
 
       if (this.country) {
@@ -16148,7 +16065,7 @@ function region_selectvue_type_template_id_b4694196_render(_ctx, _cache, $props,
 
 
 
-region_selectvue_type_script_lang_js.render = region_selectvue_type_template_id_b4694196_render
+region_selectvue_type_script_lang_js.render = region_selectvue_type_template_id_432ee51f_render
 
 /* harmony default export */ var region_select = (region_selectvue_type_script_lang_js);
 // CONCATENATED MODULE: ./src/index.js
